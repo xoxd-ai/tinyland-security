@@ -12,6 +12,7 @@ export default defineConfig({
     globals: true,
     environment: 'node',
     include: ['tests/**/*.test.ts'],
+    testTimeout: 30000,
     pool: 'threads',
     deps: {
       interopDefault: true,

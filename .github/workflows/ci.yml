@@ -2,21 +2,13 @@ name: CI
 on:
   push:
     branches: [main]
-    tags: ['v*']
   pull_request:
     branches: [main]
   workflow_dispatch:
-    inputs:
-      publish:
-        description: "Publish the selected ref after validation"
-        required: false
-        type: boolean
-        default: false
 permissions:
   actions: read
   contents: read
-  packages: write
-  id-token: write
+  packages: read
 jobs:
   package:
     uses: xoxd-ai/ci-templates/.github/workflows/js-bazel-package.yml@v2.14.1
@@ -36,6 +28,5 @@ jobs:
       package_dir: ./bazel-bin/pkg
       npm_access: public
       npm_publish_mode: disabled
-      dry_run: ${{ !(github.event_name == 'workflow_dispatch' && inputs.publish == true) }}
-      publish_on_tag: true
+      dry_run: true
     secrets: inherit
