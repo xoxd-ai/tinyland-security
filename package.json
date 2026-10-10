@@ -1,7 +1,8 @@
 {
   "name": "@tummycrypt/tinyland-security",
-  "version": "0.3.2",
-  "description": "IP hashing, encryption, risk scoring, device detection, VPN detection, rate limiting, and timing-safe utilities",
+  "version": "1.0.0",
+  "private": true,
+  "description": "IP hashing, encryption, risk scoring, device detection, VPN detection, rate limiting, timing-safe utilities and flat-file IP ban management",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -10,6 +11,10 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
+    },
+    "./ip-bans": {
+      "types": "./dist/ip-bans/index.d.ts",
+      "import": "./dist/ip-bans/index.js"
     }
   },
   "files": [
@@ -20,7 +25,6 @@
     "build": "tsc",
     "dev": "tsc --watch",
     "clean": "rm -rf dist",
-    "prepublishOnly": "pnpm build && pnpm check:package",
     "test": "vitest run",
     "test:coverage": "vitest --coverage",
     "typecheck": "tsc --noEmit",
@@ -34,32 +38,28 @@
     "vpn-detection",
     "risk-scoring",
     "fingerprint",
-    "timing-safe"
+    "timing-safe",
+    "ip-bans"
   ],
   "author": "Tinyland.dev",
   "license": "Zlib AND LicenseRef-Tinyland-Proprietary",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tinyland-inc/tinyland-security.git"
+    "url": "git+https://github.com/xoxd-ai/tinyland-security.git"
   },
   "dependencies": {},
   "devDependencies": {
-    "@fast-check/vitest": "^0.2.4",
-    "@types/node": "^20.0.0",
+    "@fast-check/vitest": "^0.5.0",
+    "@types/node": "^22.0.0",
     "fast-check": "^4.3.0",
-    "typescript": "^5.0.0",
-    "vitest": "^4.0.0",
     "publint": "^0.3.18",
-    "@tummycrypt/tinyland-auth": "^0.3.0"
+    "typescript": "7.0.2",
+    "vitest": "5.0.3"
   },
   "peerDependencies": {
-    "@tummycrypt/tinyland-auth": "^0.2.2 || ^0.3.0 || ^0.4.0",
     "@maxmind/geoip2-node": ">=5.0.0"
   },
   "peerDependenciesMeta": {
-    "@tummycrypt/tinyland-auth": {
-      "optional": true
-    },
     "@maxmind/geoip2-node": {
       "optional": true
     }
@@ -67,13 +67,9 @@
   "engines": {
     "node": ">=22.0.0"
   },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
-    "access": "public"
-  },
   "packageManager": "pnpm@10.13.1",
-  "homepage": "https://github.com/tinyland-inc/tinyland-security",
+  "homepage": "https://github.com/xoxd-ai/tinyland-security",
   "bugs": {
-    "url": "https://github.com/tinyland-inc/tinyland-security/issues"
+    "url": "https://github.com/xoxd-ai/tinyland-security/issues"
   }
 }
