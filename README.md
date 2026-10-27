@@ -47,7 +47,12 @@ threat-detection modules, are in [CHANGELOG.md](CHANGELOG.md).
 
 ## Development
 
-Bazel is the authority for build, typecheck and tests:
+Bazel is the authority for build, typecheck and tests. CI
+(`.github/workflows/ci.yml`) builds `//:pkg` and `//:typecheck` and tests
+`//:test`. That is the qualifying run.
+
+A local run is local, non-qualifying. `.bazelrc` sets
+`startup --max_idle_secs=120`, so its server exits after 120 s idle:
 
 ```sh
 bazel build //:pkg //:typecheck
